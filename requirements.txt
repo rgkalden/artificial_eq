@@ -5,7 +5,9 @@ matplotlib==3.5.1
 
 keras==2.8.0
 tensorflow==2.8.0
+tensorflow-datasets
 
 ipykernel==6.11.0
+ipywidgets
 
 tqdm==4.63.1
