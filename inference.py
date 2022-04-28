@@ -3,9 +3,14 @@ import tensorflow as tf
 from joblib import load
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 
+# Constant variables for sequence processing, match what is used in
+# the model development notebook
 MAX_LENGTH = 30
 TRUNC_TYPE = 'post'
 
+# Emotion labels, 27 + neutral for total of 28.
+# Note that ordered alphabetically except for neutral, this is accounted
+# for in the model training so predictions still match this list
 LABELS = [
     'admiration',
     'amusement',
