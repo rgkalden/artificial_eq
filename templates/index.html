@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html >
 <head>
-  <meta charset="UTF-8">
   <title>Artificial EQ Web App</title>  
 </head>
 
@@ -9,13 +8,15 @@
  <div>
 	<h1>Artificial EQ Web App</h1>
 
-     <!-- Main Input For Receiving Query to our ML -->
+  Please enter a comment, for example "This is a super happy comment", then click Predict to see what the emotion is!
+  <br>
+  <br>
+  
     <form action="{{ url_for('predict')}}" method="post">
-    	<input type="text" name="comment" placeholder="This is a super happy comment" required="required" />
-        <button type="submit" >Predict Emotion</button>
+    	<input type="text" name="comment" placeholder="Enter a comment" required="required" />
+        <button type="submit" >Predict</button>
     </form>
 
-   <br>
    <br>
    {{ prediction_text }}
 

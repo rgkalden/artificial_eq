@@ -31,7 +31,7 @@ def predict():
 
     emotion = inference.predict_emotion(model, prepared_comment)
 
-    return render_template('index.html', prediction_text='Emotion is {}'.format(emotion))
+    return render_template('index.html', prediction_text='The emotion is: {}'.format(emotion))
 
 
 if __name__ == "__main__":
