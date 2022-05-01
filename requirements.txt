@@ -13,3 +13,5 @@ ipywidgets
 tqdm==4.63.1
 
 joblib
+
+flask

@@ -77,7 +77,7 @@ def prepare_comment(comment, tokenizer, max_length=MAX_LENGTH, trunc_type=TRUNC_
     return padded_sequence
 
 
-def predict_emotion(prepared_comment, print_prediction=False, print_index=False, print_emotion=True):
+def predict_emotion(model, prepared_comment, print_prediction=False, print_index=False, print_emotion=True):
     print('Predicting...')
     prediction = model.predict(prepared_comment)
     if print_prediction == True:
@@ -104,6 +104,6 @@ if __name__ == '__main__':
     comment = input_comment()
 
     prepared_comment = prepare_comment(
-        comment, tokenizer, max_length=30, trunc_type='post')
+        comment, tokenizer, max_length=MAX_LENGTH, trunc_type=TRUNC_TYPE)
 
-    emotion = predict_emotion(prepared_comment)
+    emotion = predict_emotion(model, prepared_comment)
