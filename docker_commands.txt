@@ -1,3 +1,8 @@
+Docker image is based on Python, from docker hub
+https://hub.docker.com/_/python
+
+Build image:
 docker build -t artificial_eq -f Dockerfile .
 
-docker run -it artificial_eq 
+Run container, in interactive mode, with container name specified:
+docker run -it --name artificial_eq_app artificial_eq 
