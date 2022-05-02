@@ -1,7 +1,5 @@
 import numpy as np
 import tensorflow as tf
-from joblib import load
-from tensorflow.keras.preprocessing.sequence import pad_sequences
 from flask import Flask, request, render_template
 
 # import inference.py script functions and variables
@@ -29,10 +27,11 @@ def predict():
     prepared_comment = inference.prepare_comment(
         comment, tokenizer, max_length=inference.MAX_LENGTH, trunc_type=inference.TRUNC_TYPE)
 
-    emotion = inference.predict_emotion(model, prepared_comment)
+    emotion, prob = inference.predict_emotion(model, prepared_comment)
 
-    return render_template('index.html', prediction_text='The emotion is: {}'.format(emotion), 
-                            comment_text='The comment is: {}'.format(request.form['comment']))
+    return render_template('index.html', comment_text='The comment is: {}'.format(request.form['comment']),
+                            prediction_text='The emotion is: {}'.format(emotion),
+                            probability='Probability: {}%'.format(int(round(prob * 100))))
 
 
 if __name__ == "__main__":

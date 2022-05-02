@@ -8,9 +8,15 @@
  <div>
 	<h1>Artificial EQ Web App</h1>
 
-  Please enter a comment, for example "This is a super happy comment", then click Predict to see what the emotion is!
+  Please enter a comment, then click Predict to see what the emotion is!
   <br>
   <br>
+  Examples of comments:
+  <ul>
+    <li>"This is a super happy comment"</li>
+    <li>"What a cool guy"</li>
+    <li>"What are you doing?"</li>
+  </ul> 
 
     <form action="{{ url_for('predict')}}" method="post">
     	<input type="text" name="comment" placeholder="Enter a comment" required="required" />
@@ -19,8 +25,10 @@
 
   <br>
   {{ comment_text }}
-   <br>
-   {{ prediction_text }}
+  <br>
+  {{ prediction_text }}
+  <br>
+  {{ probability }}
 
  </div>
 </body>

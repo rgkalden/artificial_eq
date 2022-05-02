@@ -88,14 +88,17 @@ def predict_emotion(model, prepared_comment, print_prediction=False, print_index
         print(prediction)
 
     label_index = np.argmax(prediction)
+    prob = np.max(prediction)
+
     if print_index == True:
         print('LABEL index', label_index)
 
     emotion = LABELS[label_index]
     if print_emotion == True:
         print('The emotion is:', emotion)
+        print('Probability: {}%'.format(int(round(prob * 100))))
 
-    return emotion
+    return emotion, prob
 
 
 if __name__ == '__main__':
@@ -110,4 +113,4 @@ if __name__ == '__main__':
     prepared_comment = prepare_comment(
         comment, tokenizer, max_length=MAX_LENGTH, trunc_type=TRUNC_TYPE)
 
-    emotion = predict_emotion(model, prepared_comment)
+    emotion, prob = predict_emotion(model, prepared_comment)
