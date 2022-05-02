@@ -68,12 +68,16 @@ def input_comment():
     return comment
 
 
-def prepare_comment(comment, tokenizer, max_length=MAX_LENGTH, trunc_type=TRUNC_TYPE, print_sequence=False):
+def prepare_comment(comment, tokenizer, max_length=MAX_LENGTH, trunc_type=TRUNC_TYPE, print_sequence=False, print_comment=False):
     sequence = tokenizer.texts_to_sequences(comment)
     padded_sequence = pad_sequences(
         sequence, maxlen=max_length, truncating=trunc_type)
+    
+    if print_comment == True:
+        print(comment)
     if print_sequence == True:
         print(padded_sequence)
+    
     return padded_sequence
 
 

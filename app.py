@@ -2,7 +2,7 @@ import numpy as np
 import tensorflow as tf
 from joblib import load
 from tensorflow.keras.preprocessing.sequence import pad_sequences
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, render_template
 
 # import inference.py script functions and variables
 import inference
@@ -31,7 +31,8 @@ def predict():
 
     emotion = inference.predict_emotion(model, prepared_comment)
 
-    return render_template('index.html', prediction_text='The emotion is: {}'.format(emotion))
+    return render_template('index.html', prediction_text='The emotion is: {}'.format(emotion), 
+                            comment_text='The comment is: {}'.format(request.form['comment']))
 
 
 if __name__ == "__main__":
