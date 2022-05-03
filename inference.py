@@ -3,44 +3,8 @@ import tensorflow as tf
 from joblib import load
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 
-# Constant variables for sequence processing, match what is used in
-# the model development notebook
-MAX_LENGTH = 30
-TRUNC_TYPE = 'post'
-
-# Emotion labels, 27 + neutral for total of 28.
-# Note that ordered alphabetically except for neutral, this is accounted
-# for in the model training so predictions still match this list
-LABELS = [
-    'admiration',
-    'amusement',
-    'anger',
-    'annoyance',
-    'approval',
-    'caring',
-    'confusion',
-    'curiosity',
-    'desire',
-    'disappointment',
-    'disapproval',
-    'disgust',
-    'embarrassment',
-    'excitement',
-    'fear',
-    'gratitude',
-    'grief',
-    'joy',
-    'love',
-    'nervousness',
-    'optimism',
-    'pride',
-    'realization',
-    'relief',
-    'remorse',
-    'sadness',
-    'surprise',
-    'neutral',
-]
+# import config file for global variables and file paths
+import config
 
 
 def load_model(model_path):
@@ -68,7 +32,7 @@ def input_comment():
     return comment
 
 
-def prepare_comment(comment, tokenizer, max_length=MAX_LENGTH, trunc_type=TRUNC_TYPE, print_sequence=False, print_comment=False):
+def prepare_comment(comment, tokenizer, max_length=config.MAX_LENGTH, trunc_type=config.TRUNC_TYPE, print_sequence=False, print_comment=False):
     sequence = tokenizer.texts_to_sequences(comment)
     padded_sequence = pad_sequences(
         sequence, maxlen=max_length, truncating=trunc_type)
@@ -93,7 +57,7 @@ def predict_emotion(model, prepared_comment, print_prediction=False, print_index
     if print_index == True:
         print('LABEL index', label_index)
 
-    emotion = LABELS[label_index]
+    emotion = config.LABELS[label_index]
     if print_emotion == True:
         print('The emotion is:', emotion)
         print('Probability: {}%'.format(int(round(prob * 100))))
@@ -102,15 +66,14 @@ def predict_emotion(model, prepared_comment, print_prediction=False, print_index
 
 
 if __name__ == '__main__':
-    model_path = 'baseline-glove-2022-04-28-19-08-04-test-acc-0.505.h5'
-    model = load_model(model_path)
+    
+    model = load_model(config.MODEL_PATH)
 
-    tokenizer_path = 'tokenizer.joblib'
-    tokenizer = load_tokenizer(tokenizer_path)
+    tokenizer = load_tokenizer(config.TOKENIZER_PATH)
 
     comment = input_comment()
 
     prepared_comment = prepare_comment(
-        comment, tokenizer, max_length=MAX_LENGTH, trunc_type=TRUNC_TYPE)
+        comment, tokenizer, max_length=config.MAX_LENGTH, trunc_type=config.TRUNC_TYPE)
 
     emotion, prob = predict_emotion(model, prepared_comment)
