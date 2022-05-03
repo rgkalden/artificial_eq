@@ -1,1 +1,1 @@
-web: gunicorn app.py:artificial_eq
+web: gunicorn app.py:app
