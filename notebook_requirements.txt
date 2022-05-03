@@ -1,0 +1,5 @@
+matplotlib==3.5.1
+tensorflow-datasets
+ipykernel==6.11.0
+ipywidgets
+tqdm==4.63.1
