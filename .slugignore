@@ -1,0 +1,7 @@
+__pycache__
+venv
+glove.6B.100d.txt
+artificial_eq_model.ipynb
+Dockerfile
+LICENSE.txt
+README.md
