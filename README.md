@@ -1,12 +1,8 @@
-# Artificial EQ
+# Artificial EQ 😎
 
 Welcome to Artificial EQ, the Sentiment Analysis Web App to help predict emotions!
 
-## Quick Start
-To run the Flask Web App, clone this repository, open a terminal and enter the following command:
-```
-python app.py
-```
+To try the web app, go to [https://artificial-eq.herokuapp.com/](https://artificial-eq.herokuapp.com/) and have fun predicting emotions!
 
 ## 1. Introduction
 In this project, a NLP deep learning model is developed to classify the emotion associated with a comment. The model is based on the GoEmotions dataset that is available from the TensorFlow data sets collection. More information on the dataset can be found at the following links:
@@ -15,44 +11,70 @@ In this project, a NLP deep learning model is developed to classify the emotion 
 
 The emotion categories are: admiration, amusement, anger, annoyance, approval, caring, confusion, curiosity, desire, disappointment, disapproval, disgust, embarrassment, excitement, fear, gratitude, grief, joy, love, nervousness, optimism, pride, realization, relief, remorse, sadness, surprise, and neutral.
 
-Some of the web app and Flask aspects of this project have been borrowed from a tutorial which can be found [here.](https://towardsdatascience.com/how-to-easily-deploy-machine-learning-models-using-flask-b95af8fe34d4).
+Some of the Flask aspects of this project have been borrowed from a tutorial which can be found [here.](https://towardsdatascience.com/how-to-easily-deploy-machine-learning-models-using-flask-b95af8fe34d4)
+
+A helpful introduction to Heroku can be found [here.](https://www.codecademy.com/article/deploying-a-flask-app)
 
 
 ## 2. Objectives
 
 This project has the following objectives:
 
-1. Train NLP classification model using TensorFlow
+1. Develop NLP classification model using TensorFlow
 2. Create inference script
 3. Create Web App using Flask
-4. Dockerize model
+4. Deploy App on Heroku
+5. Create Docker version of App
 
-## 3. Getting Started
+## 3. Overview of Project
 
-Once this repository has been cloned, a virtual environment can be created with the Python package requirements in `requirements.txt`.
+### 3.1 Environment Setup
 
-### 3.1 Background Information on Model Development
+Once this repository has been cloned, a virtual environment can be created with the Python package requirements in `requirements.txt`. These are also the requirements for the app deployment on Heroku. 
 
-In order to develop and train the model, a Google Colab notebook has been used to take advantage of GPU access, and the file is `artificial_eq_model.ipynb`. There are two results saved from this notebook: the model, and the comment tokenizer object. The model file `*.h5` is saved so that it can be loaded in a new inferencing script to make predictions. The tokenizer object that has been fitted during model training is saved as `tokenizer.joblib` so that it can be used to preprocess new comments before predictions are made.
+>**NOTE:** The `tensorflow` library is quite large and in this case causes deployments on Heroku to fail due to large file sizes. Since GPU's are not used either locally or when deployed, the smaller `tensorflow-cpu` library is used instead.
 
->**NOTE:** Currently, only a baseline model has been created that has an accuracy score of 0.5 on test data. Most of the time, predictions make sense subjectively however there are obviously comments that will not have a correct emotion associated with the comment that is submitted to the model for prediction. In the future a more accurate model will be developed. The code is designed in a way that a new model file can be substituted in, making updates easy.
+The notebook `artificial_eq_model.ipynb` was ran on Google Colab, if it is desired to run locally then additional requirements are found in `notebook_requirements.txt`. The requirements are split in this way to keep the Heroku deployment size minimal.
 
-### 3.2 Developing the App
+### 3.2 Background Information on Model Development
 
-The model file and tokenizer file saved from `artificial_eq_model.ipynb` are used in an inferencing script, `inference.py`, to make predictions. The inferencing script is used in two ways for this project:
+In order to develop and train the model, a Google Colab notebook has been used to take advantage of GPU access, and the file is `artificial_eq_model.ipynb`. There are two results saved from this notebook: the model, and the comment tokenizer object. The model file `model.h5` is saved so that it can be loaded in a new inferencing script to make predictions. The model file is saved without the optimizer to keep the file size minimal, since the model will only be used for inference. The tokenizer object that has been fitted during model training is saved as `tokenizer.joblib` so that it can be used to preprocess new comments before predictions are made.
+
+>**NOTE:** Currently, only a baseline model has been created that has an accuracy score of 0.5 on test data. In the future a more accurate model will be developed. The code is designed in a way that a new model file can be substituted in, making updates easy.
+
+>*Future Work: Update model to increase the accuracy metric*
+
+### 3.3 Developing the App
+
+To start, a config file `config.py` is used to store global variables and the file paths for the model and tokenizer files. Then, an inferencing script `inference.py` is created to make predictions. The inferencing script is used in two ways for this project:
 1. As a library of functions for the Flask app script, `app.py`
 2. Included in the Docker image to act as the inference pipeline used to make predictions
 
-The `templates` folder holds the HTML file `index.html` which provides the UI for the Flask web app.
+The Flask app `app.py` creates a web app based on the inference script `inference.py`, and can be run in a development environment by running the script in a terminal. The `templates` folder holds the HTML file `index.html` which provides the UI for the web app.
+
+#### 3.3.1 Deploying on Heroku
+
+To  deploy the app on Heroku, the `Procfile` defines the app to use, in this case `app.py`. A `.slugignore` file is used to ignore files in this repo that are unnecesary to add to the Heroku deployment.
+
+Heroku conveniently works with an existing Git repository to deploy an app. As an example, to deploy on Heroku, the Heroku CLI an be installed and then the following terminal commands used:
+```
+heroku create
+git push heroku master
+```
+>*Future Work: Integrate Heroku with Git for CI/CD*
+
+#### 3.3.2 Deploying with Docker
 
 The `Dockerfile` builds an image based on the Python image from Docker Hub.
-
-For this project, there are two versions of the same app: a Flask web app, and a Docker app. To run each version, see the instructions in the next section.
 
 ## 4. Running the App
 
 ### 4.1 Flask Web App
-In order to run the app, enter the following command in a terminal (`cd` to this repo folder first):
+To try out the app, simply go to:
+
+[https://artificial-eq.herokuapp.com/](https://artificial-eq.herokuapp.com/)
+
+In order to run the app locally, enter the following command in a terminal (`cd` to this repo folder first):
 ```
 python app.py
 ```
@@ -61,16 +83,16 @@ Note the URL displayed in the command line (for example http://127.0.0.1:5000) a
 
 ### 4.2 Docker App
 
-The Docker App runs in a terminal.
+If Docker Desktop is installed, then it is possible to build a docker image and run the app in a terminal. For example:
 
 To run the Docker app, an image must first be created.
 ```
-docker build -t artificial_eq -f Dockerfile .
+docker build -t artificial-eq -f Dockerfile .
 ```
 
 Then, run a container in interactive mode, with container name specified:
 ```
-docker run -it --name artificial_eq_app artificial_eq
+docker run -it --name artificial-eq-app artificial-eq
 ```
 
 Follow the instructions and and have fun predicting emotions!
