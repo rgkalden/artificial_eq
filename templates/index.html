@@ -12,7 +12,7 @@
             text-align: center;}
   .social{font-family: "Arial";
           font-size: 12pt;
-          text-align: center;}          
+          text-align: center;}     
   input{font-size: 18pt;}
   button{font-size: 18pt;}
 </style>
@@ -21,36 +21,32 @@
 <body>
  <div>
 	<h1>Artificial EQ 😎</h1>
-
-  Please enter a comment, then click Predict to see what the emotion is!
+  Please enter a comment, then click Predict to use machine learning to see what the emotion is!
   <br>
   <br>
     <form action="{{ url_for('predict')}}" method="post">
     	<input type="text" name="comment" placeholder="What a cool guy" required="required" size=60 />
         <button type="submit" >Predict</button>
     </form>
-
   <br>
-  {{ comment_text }}
-  <br>
-  {{ prediction_text }}
-  <br>
-  {{ probability }}
-
+  <table style="margin-left:auto;margin-right:auto;">
+    <tr><td style="text-align:right">The comment is:</td><td><i>{{ comment_text }}</i></td></tr>
+    <tr><td style="text-align:right">The emotion is:</td><td>{{ prediction_text }} {{ emoji_output }}</td></tr>
+    <tr><td style="text-align:right">Probability:</td><td>{{ probability }}</td></tr>
+  </table>
  </div>
 <br>
  <div class="social">
    <!-- Check out the GitHub repository for this project -->
    <a href="https://github.com/rgkalden/artificial_eq">
      <img src="{{url_for('static', filename='GitHub-Mark-120px-plus.png')}}" alt="GitHub repository link" 
-          height="60" width="60" style="vertical-align:middle" >
+          height="40" width="40" style="vertical-align:middle" >
    </a>
-   <br>
-   <br>
+
    <!-- Contact me on LinkedIn -->
    <a href="https://www.linkedin.com/in/rgkalden/">
     <img src="{{url_for('static', filename='LI-In-Bug.png')}}" alt="LinkedIn Profile" 
-          height="54" width="63.5" style="vertical-align:middle" >
+          height="40" width="47" style="vertical-align:middle" >
   </a>
  </div>
 

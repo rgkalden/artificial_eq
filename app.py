@@ -29,9 +29,14 @@ def predict():
 
     emotion, prob = inference.predict_emotion(model, prepared_comment)
 
-    return render_template('index.html', comment_text='The comment is: {}'.format(request.form['comment']),
-                           prediction_text='The emotion is: {}'.format(emotion),
-                           probability='Probability: {}%'.format(int(round(prob * 100))))
+    # Match emoji to predicted emotion
+    emoji = config.EMOJI_MAP[emotion]
+
+    return render_template('index.html',
+                           emoji_output = emoji,
+                           comment_text=request.form['comment'],
+                           prediction_text=emotion,
+                           probability='{}%'.format(int(round(prob * 100))))
 
 
 if __name__ == "__main__":

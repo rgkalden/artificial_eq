@@ -43,3 +43,35 @@ OOV_TOKEN = '<oov>'
 # File paths for model file and tokenizer
 MODEL_PATH = 'model.h5'
 TOKENIZER_PATH = 'tokenizer.joblib'
+
+# Emoji map for matching emoji to the predicted emotion
+EMOJI_MAP = {
+    'admiration': '👏',
+    'amusement': '😂',
+    'anger': '😡',
+    'annoyance': '😒',
+    'approval': '👍',
+    'caring': '🤗',
+    'confusion': '😕',
+    'curiosity': '🤔',
+    'desire': '😍',
+    'disappointment': '😞',
+    'disapproval': '👎',
+    'disgust': '🤮',
+    'embarrassment': '😳',
+    'excitement': '🤩',
+    'fear': '😨',
+    'gratitude': '🙏',
+    'grief': '😢',
+    'joy': '😃',
+    'love': '❤️',
+    'nervousness': '😬',
+    'optimism': '🤞',
+    'pride': '😌',
+    'realization': '💡',
+    'relief': '😅',
+    'remorse': '😞',
+    'sadness': '😞',
+    'surprise': '😲',
+    'neutral': '😐',
+}
