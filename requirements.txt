@@ -4,3 +4,4 @@ joblib
 dill
 flask
 gunicorn
+pandas
