@@ -1,6 +1,9 @@
 import numpy as np
 import tensorflow as tf
 from joblib import load
+
+# The preprocessing.sequence module is deprecated in TensorFlow 2.8.0 and above.
+# Update in future version of app.
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 
 # import config file for global variables and file paths

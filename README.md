@@ -24,7 +24,7 @@ This project has the following objectives:
 2. Create inference script
 3. Create Web App using Flask
 4. Deploy App on Heroku
-5. Create Docker version of App
+5. BONUS: Create Docker version of App
 
 ## 3. Overview of Project
 
@@ -61,7 +61,7 @@ Heroku conveniently works with an existing Git repository to deploy an app. As a
 heroku create
 git push heroku master
 ```
->*Future Work: Integrate Heroku with Git for CI/CD*
+For this project, CI/CD is achieved by connecting Git and Heroku so that whenever a commit is pushed to the `main` branch of this remote repository, the changes will automatically be deployed to Heroku.
 
 #### 3.3.2 Deploying with Docker
 
@@ -79,9 +79,11 @@ In order to run the app locally, enter the following command in a terminal (`cd`
 python app.py
 ```
 
-Note the URL displayed in the command line (for example http://127.0.0.1:5000) and open the URL in your browser. Follow the instructions on the webpage, and have fun predicting emotions!
+Note the URL displayed in the terminal output (for example http://127.0.0.1:5000) and open the URL in your browser. The app will be opened in a local development server, which makes it easy to make changes to the app and then refresh to page to see the results. 
 
-### 4.2 Docker App
+Follow the instructions on the webpage, and have fun predicting emotions!
+
+### 4.2 BONUS: Docker App
 
 If Docker Desktop is installed, then it is possible to build a docker image and run the app in a terminal. For example:
 
