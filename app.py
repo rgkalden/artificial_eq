@@ -10,9 +10,6 @@ import config
 
 app = Flask(__name__)
 
-# Initialize list to store comments entered and the model output results
-data = []
-
 
 @app.route('/')
 def home():
@@ -20,7 +17,7 @@ def home():
 
 
 @app.route('/predict', methods=['POST'])
-def predict(data=data):
+def predict():
 
     # Load model and tokenizer
     model = inference.load_model(config.MODEL_PATH)
@@ -38,16 +35,14 @@ def predict(data=data):
     # Match emoji to predicted emotion
     emoji = config.EMOJI_MAP[emotion]
 
+
     # NEW: Store results in new row of list
+    # Initialize list to store comments entered and the model output results
+    data = []
     new_row = [request.form['comment'], emotion, emoji, prob_string]
     data.append(new_row)
-    df = pd.DataFrame(
-        data, columns=['Comment', 'Emotion', 'Emoji', 'Probability'])
-    df.sort_index(axis=0, ascending=False, inplace=True)
+    df = pd.DataFrame(data, columns=['Comment', 'Emotion', 'Emoji', 'Probability'])
     
-    # Only Show last 5 comments
-    df = df.iloc[:5]
-
     # NEW: Render template with DataFrame as table
     return render_template('index.html', tables=[df.to_html(classes='results', index=False)], titles=df.columns.values)
 
