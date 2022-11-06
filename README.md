@@ -11,28 +11,20 @@ In this project, a NLP deep learning model is developed to classify the emotion 
 
 The emotion categories are: admiration, amusement, anger, annoyance, approval, caring, confusion, curiosity, desire, disappointment, disapproval, disgust, embarrassment, excitement, fear, gratitude, grief, joy, love, nervousness, optimism, pride, realization, relief, remorse, sadness, surprise, and neutral.
 
-Some of the Flask aspects of this project have been borrowed from a tutorial which can be found [here.](https://towardsdatascience.com/how-to-easily-deploy-machine-learning-models-using-flask-b95af8fe34d4)
-
-A helpful introduction to Heroku can be found [here.](https://www.codecademy.com/article/deploying-a-flask-app)
-
-
 ## 2. Objectives
 
 This project has the following objectives:
 
 1. Develop NLP classification model using TensorFlow
 2. Create inference script
-3. Create Web App using Flask
-4. Deploy App on Heroku
-5. BONUS: Create Docker version of App
+3. Create Web App using Streamlit
+4. BONUS: Create Docker version of App
 
 ## 3. Overview of Project
 
 ### 3.1 Environment Setup
 
-Once this repository has been cloned, a virtual environment can be created with the Python package requirements in `requirements.txt`. These are also the requirements for the app deployment on Heroku. 
-
->**NOTE:** The `tensorflow` library is quite large and in this case causes deployments on Heroku to fail due to large file sizes. Since GPU's are not used either locally or when deployed, the smaller `tensorflow-cpu` library is used instead.
+Once this repository has been cloned, a virtual environment can be created with the Python package requirements in `requirements.txt`. 
 
 The notebook `artificial_eq_model.ipynb` was ran on Google Colab, if it is desired to run locally then additional requirements are found in `notebook_requirements.txt`. The requirements are split in this way to keep the Heroku deployment size minimal.
 
@@ -50,36 +42,22 @@ To start, a config file `config.py` is used to store global variables and the fi
 1. As a library of functions for the Flask app script, `app.py`
 2. Included in the Docker image to act as the inference pipeline used to make predictions
 
-The Flask app `app.py` creates a web app based on the inference script `inference.py`, and can be run in a development environment by running the script in a terminal. The `templates` folder holds the HTML file `index.html` which provides the UI for the web app.
+The Streamlit app `Home.py` creates a web app based on the scripts `predict.py` and `inference.py`, and can be run in a development environment by running in a terminal:
 
-#### 3.3.1 Deploying on Heroku
-
-To  deploy the app on Heroku, the `Procfile` defines the app to use, in this case `app.py`. A `.slugignore` file is used to ignore files in this repo that are unnecesary to add to the Heroku deployment.
-
-Heroku conveniently works with an existing Git repository to deploy an app. As an example, to deploy on Heroku, the Heroku CLI an be installed and then the following terminal commands used:
 ```
-heroku create
-git push heroku master
+streamlit run Home.py
 ```
-For this project, CI/CD is achieved by connecting Git and Heroku so that whenever a commit is pushed to the `main` branch of this remote repository, the changes will automatically be deployed to Heroku.
 
-#### 3.3.2 Deploying with Docker
+#### 3.4 Deploying with Docker
 
 The `Dockerfile` builds an image based on the Python image from Docker Hub.
 
 ## 4. Running the App
 
-### 4.1 Flask Web App
+### 4.1 Streamlit Web App
 To try out the app, simply go to:
 
-[https://artificial-eq.herokuapp.com/](https://artificial-eq.herokuapp.com/)
-
-In order to run the app locally, enter the following command in a terminal (`cd` to this repo folder first):
-```
-python app.py
-```
-
-Note the URL displayed in the terminal output (for example http://127.0.0.1:5000) and open the URL in your browser. The app will be opened in a local development server, which makes it easy to make changes to the app and then refresh to page to see the results. 
+[https://artificial-eq.herokuapp.com/](https://artificial-eq.herokuapp.com/) 
 
 Follow the instructions on the webpage, and have fun predicting emotions!
 
