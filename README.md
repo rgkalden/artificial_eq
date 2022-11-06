@@ -1,8 +1,10 @@
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://rgkalden-artificial-eq-home-6xeeq2.streamlit.app/)
+
 # Artificial EQ 😎
 
 Welcome to Artificial EQ, the Sentiment Analysis Web App to help predict emotions!
 
-To try the web app, go to [https://artificial-eq.herokuapp.com/](https://artificial-eq.herokuapp.com/) and have fun predicting emotions!
+To try the web app, go to [https://rgkalden-artificial-eq-home-6xeeq2.streamlit.app/](https://rgkalden-artificial-eq-home-6xeeq2.streamlit.app/) and have fun predicting emotions!
 
 ## 1. Introduction
 In this project, a NLP deep learning model is developed to classify the emotion associated with a comment. The model is based on the GoEmotions dataset that is available from the TensorFlow data sets collection. More information on the dataset can be found at the following links:
@@ -57,7 +59,7 @@ The `Dockerfile` builds an image based on the Python image from Docker Hub.
 ### 4.1 Streamlit Web App
 To try out the app, simply go to:
 
-[https://artificial-eq.herokuapp.com/](https://artificial-eq.herokuapp.com/) 
+[https://rgkalden-artificial-eq-home-6xeeq2.streamlit.app/](https://rgkalden-artificial-eq-home-6xeeq2.streamlit.app/) 
 
 Follow the instructions on the webpage, and have fun predicting emotions!
 
