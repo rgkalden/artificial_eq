@@ -7,3 +7,5 @@ gunicorn
 pandas
 
 protobuf==3.19.0
+
+streamlit
